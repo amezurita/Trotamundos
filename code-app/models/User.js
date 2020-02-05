@@ -4,6 +4,7 @@ const model = mongoose.model
 const PLM = require("passport-local-mongoose")
 
 const userSchema = new Schema({
+  imagen: String,
   nombre: String,
   apellido: String,
   mail: String,
@@ -11,16 +12,13 @@ const userSchema = new Schema({
     type: String,
     enum: ["m", "h"]
   },
-  viaje: {
-    type: String,
-    enum: ["ext", "mex"]
-  },
+  viaje:["ext"],
   edad_media: Number,
   presupuesto: {
     type: Number,
     enum: [5000, 10000, 15000]
   },
-  destino: {"destino_ext": {
+  destino: {
     type: String,
     enum: [
       "Estados Unidos",
@@ -32,24 +30,8 @@ const userSchema = new Schema({
       "Italia",
       "Colombia",
       "Reino Unido",
-      "Alemania"
-    ]
-  }, "destino_mex": {
-    type: String,
-    enum: [
-      "Riviera Maya",
-      "Cancún",
-      "Los Cabos",
-      "Guadalajara",
-      "Puerto Vallarta",
-      "Monterrey",
-      "Acapulco",
-      "Nuevo Vallarta",
-      "Mazatlán",
-      "Puebla",
-    ]
-  }
-},
+      "Alemania"]
+    },
   actividad: {
     type: String,
     enum: ["ecotur", "cult", "aven"]
@@ -58,7 +40,7 @@ const userSchema = new Schema({
 })
 
 userSchema.plugin(PLM, {
-  usernameField: "email"
+  usernameField: "mail"
 });
 const User = mongoose.model("User", userSchema);
 module.exports = User;

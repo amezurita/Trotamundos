@@ -14,7 +14,7 @@ const flash=require('connect-flash')
 const {isAuthenticated,checkRole}=require("./middlewares")
 
 mongoose
-  .connect('mongodb://localhost/coffee-books', {useNewUrlParser: true, useUnifiedTopology: true})
+  .connect('mongodb+srv://datatrota:<data5842>@cluster0-sxf9h.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
