@@ -6,6 +6,7 @@ const express      = require('express');
 const favicon      = require('serve-favicon');
 const hbs          = require('hbs');
 const mongoose     = require('mongoose');
+const {MongoClient} = require('mongodb');
 const logger       = require('morgan');
 const path         = require('path');
 const session = require("express-session")
@@ -58,16 +59,36 @@ app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
-app.get("facebook")
-
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
-
-
-
+app.locals.title = 'TROTAMUNDOS';
 const index = require('./routes/index');
 app.use('/', index);
+
+//connect Project data 
+async function main(){
+  const uri = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority";
+  const client = new MongoClient(uri);
+
+  try {
+    await client.connect();
+    await  listDatabases(client);
+} 
+  catch (e) {
+      console.error(e);
+  } finally {
+      await client.close();
+  }
+}
+main().catch(console.error);
+
+async function listDatabases(client){
+  databasesList = await client.db().admin().listDatabases();
+
+  console.log("Databases:");
+  databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
+
 
 
 module.exports = app;
