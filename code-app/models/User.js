@@ -12,7 +12,6 @@ const userSchema = new Schema({
     type: String,
     enum: ["m", "h"]
   },
-  viaje:["ext"],
   edad_media: Number,
   presupuesto: {
     type: Number,

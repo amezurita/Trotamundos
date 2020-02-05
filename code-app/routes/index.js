@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const passport = require("../config/passport")
-const {preferencesViews} = require("../controllers/matchControllers")
+const {preferencesViews, userViews, preferencesFill, filterView} = require("../controllers/matchControllers")
 
 
 const {signup,
@@ -26,11 +26,12 @@ router.post("/login",
               failureFlash:true
             }))
 
-//preferences
+//matching
 router.get("/preferences", preferencesViews)
-
-//user private view
-router.get("/", )
+router.post("/preferences", preferencesFill)
+router.get("/filter", filterView)
+router.post("/filter", filter)
+router.get("/user", userViews)
 
 
             //Aqui va facebook
