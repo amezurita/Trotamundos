@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const passport = require("../config/passport")
+const {preferencesViews} = require("../controllers/matchControllers")
 
 
 const {signup,
@@ -9,7 +10,6 @@ const {signup,
      loginView,
     logout} = require("../controllers/authControllers")
 const {isAuthenticated,checkRole} = require("../middlewares")
-const { preferencesViews } = require("../controllers/matchControllers")
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -29,6 +29,9 @@ router.post("/login",
 //preferences
 router.get("/preferences", preferencesViews)
 
+//user private view
+router.get("/", )
+
 
             //Aqui va facebook
 router.get('/auth/facebook', passport.authenticate('facebook'));
@@ -36,6 +39,8 @@ router.get('/auth/facebook', passport.authenticate('facebook'));
    passport.authenticate('facebook', { successRedirect: '/preferences',
   failureRedirect: '/login' }, ));
   router.get("/logout",logout)
+
+
 
 
 

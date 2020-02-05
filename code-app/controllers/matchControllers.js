@@ -1,10 +1,16 @@
 const user = require("../models/User")
 
 
-exports.preferencesView=(req, res, next)=>{
+const preferencesView=(req, res, next)=>{
   res.render("/preferences")
 }
+
+const 
+
+
 
 //exports.addAge=(req, res, next) =>{
  //const { email, password} = req.body 
  //const age = user.populate(user.age)}
+
+ module.exports = {preferencesView} 
