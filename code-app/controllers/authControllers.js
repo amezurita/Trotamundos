@@ -4,7 +4,7 @@ exports.signUpView=(req,res,next)=>{
   res.render('auth/signup')
 }
 
-exports.signup=(req, res, next) => {
+exports.signup= (req, res, next) => {
 const  { email, password } = req.body;
 const onDB=user.findOne({email})
 if(onDB===true){

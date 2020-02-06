@@ -14,7 +14,7 @@ const flash=require('connect-flash')
 const {isAuthenticated,checkRole}=require("./middlewares")
 
 mongoose
-  .connect('mongodb+srv://datatrota:<data5842>@cluster0-sxf9h.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+  .connect('mongodb://localhost/trotamundos', {useNewUrlParser: true, useUnifiedTopology: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -66,28 +66,6 @@ const index = require('./routes/index');
 app.use('/', index);
 
 //connect Project data 
-async function main(){
-  const uri = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority";
-  const client = new MongoClient(uri);
-
-  try {
-    await client.connect();
-    await  listDatabases(client);
-} 
-  catch (e) {
-      console.error(e);
-  } finally {
-      await client.close();
-  }
-}
-main().catch(console.error);
-
-async function listDatabases(client){
-  databasesList = await client.db().admin().listDatabases();
-
-  console.log("Databases:");
-  databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
 
 
 
